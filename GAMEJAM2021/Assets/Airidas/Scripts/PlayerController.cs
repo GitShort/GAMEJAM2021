@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 5f;
     private Rigidbody2D _rb;
+    SpriteRenderer _rend;
 
     Vector2 _movement;
 
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _rend = GetComponent<SpriteRenderer>();
     }
 
     
@@ -25,6 +27,11 @@ public class PlayerController : MonoBehaviour
     {
         _movement.x = Input.GetAxisRaw("Horizontal");
         _movement.y = Input.GetAxisRaw("Vertical");
+
+        if (_movement.x > 0 && !_rend.flipX)
+            _rend.flipX = true;
+        else if (_movement.x < 0 && _rend.flipX)
+            _rend.flipX = false;
 
         if (_pickupAllowed && Input.GetKeyDown(KeyCode.E))
         {
