@@ -107,6 +107,15 @@ TextureImporter:
   - first:
       213: -1116191131400464056
     second: House tileset_34
+  - first:
+      213: 8989803039383084380
+    second: House tileset_35
+  - first:
+      213: 3595901009640534572
+    second: House tileset_36
+  - first:
+      213: 7255845434123299666
+    second: House tileset_37
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -884,8 +893,8 @@ TextureImporter:
       name: House tileset_31
       rect:
         serializedVersion: 2
-        x: 0
-        y: 42
+        x: 126
+        y: 84
         width: 42
         height: 42
       alignment: 0
@@ -905,8 +914,8 @@ TextureImporter:
       name: House tileset_32
       rect:
         serializedVersion: 2
-        x: 42
-        y: 42
+        x: 168
+        y: 84
         width: 42
         height: 42
       alignment: 0
@@ -926,7 +935,7 @@ TextureImporter:
       name: House tileset_33
       rect:
         serializedVersion: 2
-        x: 126
+        x: 0
         y: 42
         width: 42
         height: 42
@@ -947,7 +956,7 @@ TextureImporter:
       name: House tileset_34
       rect:
         serializedVersion: 2
-        x: 168
+        x: 42
         y: 42
         width: 42
         height: 42
@@ -960,6 +969,69 @@ TextureImporter:
       bones: []
       spriteID: 8491f6f641e7280f0800000000000000
       internalID: -1116191131400464056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: House tileset_35
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 42
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5dd72bfb3232cc70800000000000000
+      internalID: 8989803039383084380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: House tileset_36
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 42
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c22b7179ae437e130800000000000000
+      internalID: 3595901009640534572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: House tileset_37
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 42
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25b2f0eaaf0f1b460800000000000000
+      internalID: 7255845434123299666
       vertices: []
       indices: 
       edges: []

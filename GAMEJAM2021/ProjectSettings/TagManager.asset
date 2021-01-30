@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Pickupable
   - Door
+  - HairClipper
   layers:
   - Default
   - TransparentFX
