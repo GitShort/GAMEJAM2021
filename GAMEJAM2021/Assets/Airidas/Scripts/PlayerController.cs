@@ -53,9 +53,15 @@ public class PlayerController : MonoBehaviour
         {
             text.text = null;
             if (!_openedDoor.GetComponent<DoorController>().IsOpened)
+            {
                 _openedDoor.GetComponent<DoorController>().OpenDoor();
+                _openedDoor.GetComponent<DoorController>().TurnOnLight();
+            }
             else
+            {
                 _openedDoor.GetComponent<DoorController>().CloseDoor();
+                _openedDoor.GetComponent<DoorController>().TurnOffLight();
+            }
         }
         
     }
