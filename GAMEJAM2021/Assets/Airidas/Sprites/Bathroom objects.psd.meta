@@ -23,6 +23,15 @@ TextureImporter:
   - first:
       213: 4180058645111269181
     second: Bathroom objects_6
+  - first:
+      213: -3726820400803354764
+    second: Bathroom objects_7
+  - first:
+      213: -3785792977400425423
+    second: Bathroom objects_8
+  - first:
+      213: -4993679923684274130
+    second: Bathroom objects_9
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -209,10 +218,10 @@ TextureImporter:
       name: Bathroom objects_4
       rect:
         serializedVersion: 2
-        x: 15
-        y: 370
-        width: 24
-        height: 21
+        x: 63
+        y: 394
+        width: 14
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -230,10 +239,10 @@ TextureImporter:
       name: Bathroom objects_5
       rect:
         serializedVersion: 2
-        x: 57
-        y: 384
+        x: 15
+        y: 370
         width: 24
-        height: 8
+        height: 21
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -251,6 +260,27 @@ TextureImporter:
       name: Bathroom objects_6
       rect:
         serializedVersion: 2
+        x: 57
+        y: 384
+        width: 24
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d37682ad03d820a30800000000000000
+      internalID: 4180058645111269181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bathroom objects_7
+      rect:
+        serializedVersion: 2
         x: 47
         y: 377
         width: 5
@@ -262,8 +292,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d37682ad03d820a30800000000000000
-      internalID: 4180058645111269181
+      spriteID: 477ef6c479ca74cc0800000000000000
+      internalID: -3726820400803354764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bathroom objects_8
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 375
+        width: 4
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13411e45859267bc0800000000000000
+      internalID: -3785792977400425423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bathroom objects_9
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 353
+        width: 19
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e209cca2192e2bab0800000000000000
+      internalID: -4993679923684274130
       vertices: []
       indices: 
       edges: []
