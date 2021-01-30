@@ -5,16 +5,24 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
-    public int currentDay;
+    public static int CurrentDay = 0;
+    public static bool AteFood; // TODO: set to true when meal from the fridge has been chosen
+    public static bool ComputerActionDone; // TOOD: set to true when the required computer action has been completed 
+    public static bool LaundryDone;
+    public static bool SofaCleaned;
+    public static bool TrashThrownOut;
 
     void Start()
     {
-        currentDay = 0;
+        AteFood = false;
+        LaundryDone = false;
+        SofaCleaned = false;
+        TrashThrownOut = false;
+        CurrentDay = 0;
     }
 
     void Update()
     {
-        
     }
 
     public static GameManager Instance()
@@ -27,8 +35,14 @@ public class GameManager : MonoBehaviour
         return _instance;
     }
 
-    public void UpdateDay()
+    public static void UpdateDay()
     {
-        currentDay++;
+        CurrentDay++;
+    }
+
+    public static void ResetDay() // call this method to reset stuff for the new day
+    {
+        AteFood = false;
+        ComputerActionDone = false;
     }
 }

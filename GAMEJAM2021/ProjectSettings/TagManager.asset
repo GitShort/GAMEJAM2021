@@ -7,6 +7,12 @@ TagManager:
   - Pickupable
   - Door
   - HairClipper
+  - Fridge
+  - PC
+  - DirtyClothes
+  - WashingMachine
+  - Sofa
+  - TrashCan
   layers:
   - Default
   - TransparentFX

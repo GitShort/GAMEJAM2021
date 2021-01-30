@@ -15,12 +15,26 @@ public class PlayerController : MonoBehaviour
 
     bool _pickupAllowed = false;
     bool _isNearDoor = false;
+    bool _isNearFridge = false;
+    bool _isNearComputer = false;
+    bool _isNearDirtyClothes = false;
+    bool _isClothesPickedUp = false;
+    bool _isNearWashingMachine = false;
+
+    bool _isNearSofa = false;
+    bool _isNearTrashCan = false;
+
     GameObject _pickedUpObject = null;
     GameObject _openedDoor = null;
 
+    int trashCount = 0;
+
     [SerializeField] TextMeshPro text;
+    [SerializeField] GameObject dirtyClothes;
+    [SerializeField] GameObject trashBag;
 
     Animator _anim;
+    [SerializeField] Animator _smokeAnimation;
 
     void Start()
     {
@@ -28,6 +42,8 @@ public class PlayerController : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _rend = GetComponent<SpriteRenderer>();
         _anim = GetComponent<Animator>();
+        dirtyClothes.SetActive(false);
+        trashBag.SetActive(false);
     }
 
     
@@ -49,13 +65,63 @@ public class PlayerController : MonoBehaviour
         else if (_movement.x < 0 && _rend.flipX)
             _rend.flipX = false;
 
-        if (_pickupAllowed && Input.GetKeyDown(KeyCode.E) && _pickedUpObject.name == "Hair clipper" && GameManager.Instance().currentDay == 0)
+        //FOR DEBUGGING PURPOSES ONLY
+        if (Input.GetKeyDown(KeyCode.Q))
         {
+            GameManager.UpdateDay();
+            Debug.Log(GameManager.CurrentDay);
+        }
+        //
+
+        if (_isNearFridge && Input.GetKeyDown(KeyCode.E))
+        {
+            Debug.Log("Fridge window opened!");
+        }
+
+        if ((_isNearComputer && Input.GetKeyDown(KeyCode.E)) && (GameManager.CurrentDay == 1 || GameManager.CurrentDay == 6))
+        {
+            Debug.Log("Computer window opened!");
+        }
+
+        if ((_pickupAllowed && Input.GetKeyDown(KeyCode.E) && _pickedUpObject.name == "Hair clipper") && GameManager.CurrentDay == 0)
+        {
+            _smokeAnimation.Play("Smoke");
             playerState = 2;
             Debug.Log("SHAVED");
             Destroy(_pickedUpObject);
-            
+
         }
+        else if ((_isNearDirtyClothes && Input.GetKeyDown(KeyCode.E)) && GameManager.CurrentDay == 2 && !_isClothesPickedUp)
+        {
+            Debug.Log("Picked up dirty clothes");
+            _isClothesPickedUp = true;
+            dirtyClothes.SetActive(true);
+            Destroy(_pickedUpObject);
+        }
+        else if (_isNearWashingMachine && Input.GetKeyDown(KeyCode.E) && GameManager.CurrentDay == 2 && _isClothesPickedUp)
+        {
+            _isClothesPickedUp = false;
+            dirtyClothes.SetActive(false);
+            GameManager.LaundryDone = true;
+            Debug.Log("Laundry done");
+        }
+        else if (_isNearSofa && Input.GetKeyDown(KeyCode.E) && GameManager.CurrentDay == 3 && !GameManager.SofaCleaned)
+        {
+            GameManager.SofaCleaned = true;
+            _pickedUpObject.GetComponent<SofaManager>().CleanSofa();
+            if (!trashBag.activeInHierarchy)
+                trashBag.SetActive(true);
+            trashCount++;
+            Debug.Log("Sofa cleaned");
+        }
+        else if (_isNearTrashCan && Input.GetKeyDown(KeyCode.E) && GameManager.CurrentDay == 3 && trashCount >= 1)
+        {
+            GameManager.TrashThrownOut = true;
+            trashBag.SetActive(false);
+            Debug.Log("Trash thrown out!");
+        }
+
+
         else if (_pickupAllowed && Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("Picked up " + _pickedUpObject.name);
@@ -103,6 +169,35 @@ public class PlayerController : MonoBehaviour
             else
                 text.text = "Press E to close the door";
         }
+        else if (collision.gameObject.tag.Equals("Fridge"))
+        {
+            _isNearFridge = true;
+        }
+        else if (collision.gameObject.tag.Equals("PC"))
+        {
+            _isNearComputer = true;
+        }
+        else if (collision.gameObject.tag.Equals("DirtyClothes"))
+        {
+            _isNearDirtyClothes = true;
+            _pickedUpObject = collision.gameObject;
+        }
+        else if (collision.gameObject.tag.Equals("WashingMachine"))
+        {
+            _isNearWashingMachine = true;
+            _pickedUpObject = collision.gameObject;
+        }
+        else if (collision.gameObject.tag.Equals("Sofa"))
+        {
+            _isNearSofa = true;
+            _pickedUpObject = collision.gameObject;
+        }
+        else if (collision.gameObject.tag.Equals("TrashCan"))
+        {
+            _isNearTrashCan = true;
+        }
+
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -118,6 +213,34 @@ public class PlayerController : MonoBehaviour
             _isNearDoor = false;
             _openedDoor = null;
             text.text = null;
+        }
+        else if (collision.gameObject.tag.Equals("Fridge"))
+        {
+            _isNearFridge = false;
+        }
+        else if (collision.gameObject.tag.Equals("PC"))
+        {
+            _isNearComputer = false;
+        }
+        else if (collision.gameObject.tag.Equals("DirtyClothes"))
+        {
+            _isNearDirtyClothes = false;
+            _pickedUpObject = null;
+        }
+        else if (collision.gameObject.tag.Equals("WashingMachine"))
+        {
+            _isNearWashingMachine = false;
+            _pickedUpObject = null;
+        }
+        else if (collision.gameObject.tag.Equals("Sofa"))
+        {
+            _isNearSofa = false;
+            _pickedUpObject = null;
+        }
+        else if (collision.gameObject.tag.Equals("TrashCan"))
+        {
+            _isNearTrashCan = false;
+
         }
     }
 
