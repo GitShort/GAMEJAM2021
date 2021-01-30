@@ -1,37 +1,43 @@
 fileFormatVersion: 2
-guid: d5bde1ca0d44d7744b5febb185eaf4d7
+guid: 54bdf50903f04e249ad18f76fc6e189b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6137524019896555016
-    second: Bathroom objects_0
+      213: 400354228367679461
+    second: Various objects_0
   - first:
-      213: 6359283374246297885
-    second: Bathroom objects_1
+      213: 916043350517287183
+    second: Various objects_1
   - first:
-      213: 1271792639978165718
-    second: Bathroom objects_2
+      213: 327742124051445590
+    second: Various objects_2
   - first:
-      213: -1764099172766166838
-    second: Bathroom objects_3
+      213: -3929070104078009364
+    second: Various objects_3
   - first:
-      213: -8948282074076172676
-    second: Bathroom objects_4
+      213: -8441898873087787300
+    second: Various objects_4
   - first:
-      213: -5222765369107058706
-    second: Bathroom objects_5
+      213: 6040199959680505169
+    second: Various objects_5
   - first:
-      213: 4180058645111269181
-    second: Bathroom objects_6
+      213: -2774333162432327022
+    second: Various objects_6
   - first:
-      213: -3726820400803354764
-    second: Bathroom objects_7
+      213: 7293877094627807647
+    second: Various objects_7
   - first:
-      213: -3785792977400425423
-    second: Bathroom objects_8
+      213: 7282214596715526769
+    second: Various objects_8
   - first:
-      213: -4993679923684274130
-    second: Bathroom objects_9
+      213: 6317848166251908757
+    second: Various objects_9
+  - first:
+      213: 3317086771600103587
+    second: Various objects_10
+  - first:
+      213: -6523023594343792171
+    second: Various objects_11
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -131,7 +137,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bathroom objects_0
+      name: Various objects_0
       rect:
         serializedVersion: 2
         x: 1
@@ -145,14 +151,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8f963a10c6223daa0800000000000000
-      internalID: -6137524019896555016
+      spriteID: 5ef5e2eac085e8500800000000000000
+      internalID: 400354228367679461
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bathroom objects_1
+      name: Various objects_1
       rect:
         serializedVersion: 2
         x: 15
@@ -166,14 +172,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d118ff33986b04850800000000000000
-      internalID: 6359283374246297885
+      spriteID: f09017ae29076bc00800000000000000
+      internalID: 916043350517287183
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bathroom objects_2
+      name: Various objects_2
       rect:
         serializedVersion: 2
         x: 47
@@ -187,14 +193,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6d5dad5faa056a110800000000000000
-      internalID: 1271792639978165718
+      spriteID: 657b402b9bf5c8400800000000000000
+      internalID: 327742124051445590
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bathroom objects_3
+      name: Various objects_3
       rect:
         serializedVersion: 2
         x: 44
@@ -208,14 +214,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ac056b22629a487e0800000000000000
-      internalID: -1764099172766166838
+      spriteID: cebb2d4be832979c0800000000000000
+      internalID: -3929070104078009364
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bathroom objects_4
+      name: Various objects_4
       rect:
         serializedVersion: 2
         x: 63
@@ -229,14 +235,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c7ea1b81dd051d380800000000000000
-      internalID: -8948282074076172676
+      spriteID: cdef4d7b3b958da80800000000000000
+      internalID: -8441898873087787300
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bathroom objects_5
+      name: Various objects_5
       rect:
         serializedVersion: 2
         x: 15
@@ -250,14 +256,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eef692571920587b0800000000000000
-      internalID: -5222765369107058706
+      spriteID: 155d5196cd913d350800000000000000
+      internalID: 6040199959680505169
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bathroom objects_6
+      name: Various objects_6
       rect:
         serializedVersion: 2
         x: 57
@@ -271,14 +277,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d37682ad03d820a30800000000000000
-      internalID: 4180058645111269181
+      spriteID: 29292a410b69f79d0800000000000000
+      internalID: -2774333162432327022
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bathroom objects_7
+      name: Various objects_7
       rect:
         serializedVersion: 2
         x: 47
@@ -292,14 +298,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 477ef6c479ca74cc0800000000000000
-      internalID: -3726820400803354764
+      spriteID: f9116aca29e093560800000000000000
+      internalID: 7293877094627807647
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bathroom objects_8
+      name: Various objects_8
       rect:
         serializedVersion: 2
         x: 57
@@ -313,14 +319,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 13411e45859267bc0800000000000000
-      internalID: -3785792977400425423
+      spriteID: 17ab467c79f9f0560800000000000000
+      internalID: 7282214596715526769
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bathroom objects_9
+      name: Various objects_9
       rect:
         serializedVersion: 2
         x: 15
@@ -334,8 +340,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e209cca2192e2bab0800000000000000
-      internalID: -4993679923684274130
+      spriteID: 59e4c4e0f618da750800000000000000
+      internalID: 6317848166251908757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Various objects_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 309
+        width: 10
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a81f5618d8a80e20800000000000000
+      internalID: 3317086771600103587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Various objects_11
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 309
+        width: 21
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d185a5f9909975a0800000000000000
+      internalID: -6523023594343792171
       vertices: []
       indices: 
       edges: []
