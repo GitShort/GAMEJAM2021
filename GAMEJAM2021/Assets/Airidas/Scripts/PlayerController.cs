@@ -5,7 +5,7 @@ using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] int playerState = 1;
+    [SerializeField] int playerState;
 
     [SerializeField] float moveSpeed = 5f;
     private Rigidbody2D _rb;
@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        playerState = 1;
         _rb = GetComponent<Rigidbody2D>();
         _rend = GetComponent<SpriteRenderer>();
         _anim = GetComponent<Animator>();
@@ -32,7 +33,7 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
-        _anim.SetInteger("PlayerState", playerState);
+        _anim.SetInteger("playerState", playerState);
 
         _movement.x = Input.GetAxisRaw("Horizontal");
         _movement.y = Input.GetAxisRaw("Vertical");
@@ -48,11 +49,12 @@ public class PlayerController : MonoBehaviour
         else if (_movement.x < 0 && _rend.flipX)
             _rend.flipX = false;
 
-        if (_pickupAllowed && Input.GetKeyDown(KeyCode.E) && _pickedUpObject.name == "Hair clipper")
+        if (_pickupAllowed && Input.GetKeyDown(KeyCode.E) && _pickedUpObject.name == "Hair clipper" && GameManager.Instance().currentDay == 0)
         {
+            playerState = 2;
             Debug.Log("SHAVED");
             Destroy(_pickedUpObject);
-            playerState = 2;
+            
         }
         else if (_pickupAllowed && Input.GetKeyDown(KeyCode.E))
         {
