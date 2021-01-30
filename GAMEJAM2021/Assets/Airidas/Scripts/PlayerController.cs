@@ -16,10 +16,13 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] TextMeshPro text;
 
+    Animator _anim;
+
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _rend = GetComponent<SpriteRenderer>();
+        _anim = GetComponent<Animator>();
     }
 
     
@@ -27,6 +30,12 @@ public class PlayerController : MonoBehaviour
     {
         _movement.x = Input.GetAxisRaw("Horizontal");
         _movement.y = Input.GetAxisRaw("Vertical");
+        if (_movement.x != 0 || _movement.y != 0)
+        {
+            _anim.SetBool("isRunning", true);
+        }
+        else
+            _anim.SetBool("isRunning", false);
 
         if (_movement.x > 0 && !_rend.flipX)
             _rend.flipX = true;
