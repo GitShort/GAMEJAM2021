@@ -12,7 +12,9 @@ public class PlayerController : MonoBehaviour
     Vector2 _movement;
 
     bool _pickupAllowed = false;
+    bool _isNearDoor = false;
     GameObject _pickedUpObject = null;
+    GameObject _openedDoor = null;
 
     [SerializeField] TextMeshPro text;
 
@@ -47,6 +49,15 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Picked up " + _pickedUpObject.name);
             Pickup();
         }
+        if (_isNearDoor && Input.GetKeyDown(KeyCode.E))
+        {
+            text.text = null;
+            if (!_openedDoor.GetComponent<DoorController>().IsOpened)
+                _openedDoor.GetComponent<DoorController>().OpenDoor();
+            else
+                _openedDoor.GetComponent<DoorController>().CloseDoor();
+        }
+        
     }
 
     private void FixedUpdate()
@@ -60,7 +71,16 @@ public class PlayerController : MonoBehaviour
         {
             _pickupAllowed = true;
             _pickedUpObject = collision.gameObject;
-            text.text = "Hit E to pick up " + _pickedUpObject.name;
+            text.text = "Press E to pick up " + _pickedUpObject.name;
+        }
+        else if (collision.gameObject.tag.Equals("Door"))
+        {
+            _isNearDoor = true;
+            _openedDoor = collision.gameObject;
+            if (!_openedDoor.GetComponent<DoorController>().IsOpened)
+                text.text = "Press E to open the door";
+            else
+                text.text = "Press E to close the door";
         }
     }
 
@@ -70,6 +90,12 @@ public class PlayerController : MonoBehaviour
         {
             _pickupAllowed = false;
             _pickedUpObject = null;
+            text.text = null;
+        }
+        else if (collision.gameObject.tag.Equals("Door"))
+        {
+            _isNearDoor = false;
+            _openedDoor = null;
             text.text = null;
         }
     }
