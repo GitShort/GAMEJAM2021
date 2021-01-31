@@ -5,6 +5,7 @@ using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] Dialog dialog;
     [SerializeField] int playerState;
 
     [SerializeField] float moveSpeed = 5f;
@@ -51,7 +52,7 @@ public class PlayerController : MonoBehaviour
         trashBag.SetActive(false);
     }
 
-    
+
     void Update()
     {
         _anim.SetInteger("playerState", playerState);
@@ -82,6 +83,7 @@ public class PlayerController : MonoBehaviour
         {
             FindObjectOfType<AudioManager>().Play("Computer");
             Debug.Log("Fridge window opened!");
+            DialogManager.Instance.ShowDialog(dialog, 0);
         }
 
         if ((_isNearComputer && Input.GetKeyDown(KeyCode.E)) && (GameManager.CurrentDay == 1 || GameManager.CurrentDay == 6))
@@ -97,6 +99,7 @@ public class PlayerController : MonoBehaviour
             playerState = 2;
             Debug.Log("SHAVED");
             Destroy(_pickedUpObject);
+            DialogManager.Instance.ShowDialog(dialog, 1);
 
         }
         else if ((_isNearDirtyClothes && Input.GetKeyDown(KeyCode.E)) && GameManager.CurrentDay == 2 && !_isClothesPickedUp)
@@ -185,7 +188,12 @@ public class PlayerController : MonoBehaviour
                 _openedDoor.GetComponent<DoorController>().TurnOffLight();
             }
         }
-        
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            DialogManager.Instance.HideDialog();
+        }
+
     }
 
     private void FixedUpdate()
