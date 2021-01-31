@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
 
     int trashCount = 0;
 
+    [SerializeField] GameObject clothesShop;
     [SerializeField] TextMeshPro text;
     [SerializeField] GameObject dirtyClothes;
     [SerializeField] GameObject trashBag;
@@ -87,6 +88,7 @@ public class PlayerController : MonoBehaviour
         if ((_isNearComputer && Input.GetKeyDown(KeyCode.E)) && (GameManager.CurrentDay == 1 || GameManager.CurrentDay == 6))
         {
             FindObjectOfType<AudioManager>().Play("Computer");
+            clothesShop.SetActive(true);
             Debug.Log("Computer window opened!");
         }
 
@@ -219,43 +221,61 @@ public class PlayerController : MonoBehaviour
         else if (collision.gameObject.tag.Equals("Fridge"))
         {
             _isNearFridge = true;
+            if(!GameManager.AteFood)
+                text.text = "Press E to open the fridge";
         }
         else if (collision.gameObject.tag.Equals("PC"))
         {
             _isNearComputer = true;
+            if(!GameManager.ComputerActionDone && (GameManager.CurrentDay == 1 || GameManager.CurrentDay == 6))
+                text.text = "Press E to open up the computer screen";
         }
         else if (collision.gameObject.tag.Equals("DirtyClothes"))
         {
             _isNearDirtyClothes = true;
             _pickedUpObject = collision.gameObject;
+            if(GameManager.CurrentDay == 2)
+                text.text = "Press E to pick up " + _pickedUpObject.name;
         }
         else if (collision.gameObject.tag.Equals("WashingMachine"))
         {
             _isNearWashingMachine = true;
             _pickedUpObject = collision.gameObject;
+            if (_isClothesPickedUp)
+                text.text = "Press E to place clothes into washing machine";
         }
         else if (collision.gameObject.tag.Equals("Sofa"))
         {
             _isNearSofa = true;
             _pickedUpObject = collision.gameObject;
+            if (GameManager.CurrentDay == 3 && !GameManager.SofaCleaned)
+                text.text = "Press E to clean the couch";
         }
         else if (collision.gameObject.tag.Equals("Trash"))
         {
             _isNearTrash = true;
             _pickedUpObject = collision.gameObject;
+            if(GameManager.CurrentDay == 3)
+                text.text = "Press E to pick up " + _pickedUpObject.name;
         }
         else if (collision.gameObject.tag.Equals("TrashCan"))
         {
             _isNearTrashCan = true;
+            if(trashCount >=3)
+                text.text = "Press E to throw out the trash ";
         }
         else if (collision.gameObject.tag.Equals("GymSet"))
         {
             _isNearGym = true;
+            if(!GameManager.WorkedOut)
+                text.text = "Press E to exercise";
         }
         else if (collision.gameObject.tag.Equals("NewClothes"))
         {
             _isNearNewClothes = true;
             _pickedUpObject = collision.gameObject;
+            if(GameManager.CurrentDay == 7)
+                text.text = "Press E to wear new clothes";
         }
 
     }
@@ -283,42 +303,51 @@ public class PlayerController : MonoBehaviour
         else if (collision.gameObject.tag.Equals("Fridge"))
         {
             _isNearFridge = false;
+            text.text = null;
         }
         else if (collision.gameObject.tag.Equals("PC"))
         {
             _isNearComputer = false;
+            text.text = null;
         }
         else if (collision.gameObject.tag.Equals("DirtyClothes"))
         {
             _isNearDirtyClothes = false;
             _pickedUpObject = null;
+            text.text = null;
         }
         else if (collision.gameObject.tag.Equals("WashingMachine"))
         {
             _isNearWashingMachine = false;
             _pickedUpObject = null;
+            text.text = null;
         }
         else if (collision.gameObject.tag.Equals("Sofa"))
         {
             _isNearSofa = false;
             _pickedUpObject = null;
+            text.text = null;
         }
         else if (collision.gameObject.tag.Equals("Trash"))
         {
             _isNearTrash = false;
+            text.text = null;
         }
         else if (collision.gameObject.tag.Equals("TrashCan"))
         {
             _isNearTrashCan = false;
+            text.text = null;
         }
         else if (collision.gameObject.tag.Equals("GymSet"))
         {
             _isNearGym = false;
+            text.text = null;
         }
         else if (collision.gameObject.tag.Equals("NewClothes"))
         {
             _isNearNewClothes = false;
             _pickedUpObject = null;
+            text.text = null;
         }
     }
 

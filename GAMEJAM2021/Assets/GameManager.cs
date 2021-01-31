@@ -59,6 +59,11 @@ public class GameManager : MonoBehaviour
         WorkedOut = false;
     }
 
+    public static void PurchaseFinished()
+    {
+        ComputerActionDone = true;
+    }
+
     public void SpawnNewObjects(int day, GameObject obj)
     {
         if (CurrentDay == day && obj != null)
