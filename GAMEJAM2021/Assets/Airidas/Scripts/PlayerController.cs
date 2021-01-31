@@ -80,16 +80,19 @@ public class PlayerController : MonoBehaviour
 
         if (_isNearFridge && Input.GetKeyDown(KeyCode.E))
         {
+            FindObjectOfType<AudioManager>().Play("Computer");
             Debug.Log("Fridge window opened!");
         }
 
         if ((_isNearComputer && Input.GetKeyDown(KeyCode.E)) && (GameManager.CurrentDay == 1 || GameManager.CurrentDay == 6))
         {
+            FindObjectOfType<AudioManager>().Play("Computer");
             Debug.Log("Computer window opened!");
         }
 
         if ((_isNearHairClipper && Input.GetKeyDown(KeyCode.E)) && GameManager.CurrentDay == 0)
         {
+            FindObjectOfType<AudioManager>().Play("Shaving");
             _smokeAnimation.Play("Smoke", -1, 0);
             playerState = 2;
             Debug.Log("SHAVED");
@@ -98,6 +101,7 @@ public class PlayerController : MonoBehaviour
         }
         else if ((_isNearDirtyClothes && Input.GetKeyDown(KeyCode.E)) && GameManager.CurrentDay == 2 && !_isClothesPickedUp)
         {
+            FindObjectOfType<AudioManager>().Play("Drop");
             Debug.Log("Picked up dirty clothes");
             _isClothesPickedUp = true;
             dirtyClothes.SetActive(true);
@@ -105,6 +109,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (_isNearWashingMachine && Input.GetKeyDown(KeyCode.E) && GameManager.CurrentDay == 2 && _isClothesPickedUp)
         {
+            FindObjectOfType<AudioManager>().Play("Drop");
             _isClothesPickedUp = false;
             dirtyClothes.SetActive(false);
             _pickedUpObject.GetComponent<ObjectSwitchManager>().ActionDone();
@@ -114,6 +119,7 @@ public class PlayerController : MonoBehaviour
         else if (_isNearSofa && Input.GetKeyDown(KeyCode.E) && GameManager.CurrentDay == 3 && !GameManager.SofaCleaned)
         {
             GameManager.SofaCleaned = true;
+            FindObjectOfType<AudioManager>().Play("Shaving");
             _pickedUpObject.GetComponent<ObjectSwitchManager>().ActionDone();
             if (!trashBag.activeInHierarchy)
                 trashBag.SetActive(true);
@@ -122,6 +128,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (_isNearTrash && Input.GetKeyDown(KeyCode.E) && GameManager.CurrentDay == 3)
         {
+            FindObjectOfType<AudioManager>().Play("Drop");
             trashCount++;
             if (!trashBag.activeInHierarchy)
                 trashBag.SetActive(true);
@@ -130,12 +137,14 @@ public class PlayerController : MonoBehaviour
         }
         else if (_isNearTrashCan && Input.GetKeyDown(KeyCode.E) && GameManager.CurrentDay == 3 && trashCount >= 3)
         {
+            FindObjectOfType<AudioManager>().Play("Drop");
             GameManager.TrashThrownOut = true;
             trashBag.SetActive(false);
             Debug.Log("Trash thrown out!");
         }
         else if (_isNearGym && Input.GetKeyDown(KeyCode.E) && (GameManager.CurrentDay == 4 || GameManager.CurrentDay == 5 || GameManager.CurrentDay == 6) && !GameManager.WorkedOut)
         {
+            FindObjectOfType<AudioManager>().Play("Shaving");
             Debug.Log("Working out");
             _smokeAnimation.Play("Smoke", -1, 0);
             // Stop player movement while animation is playing
@@ -143,6 +152,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (_isNearNewClothes && Input.GetKeyDown(KeyCode.E) && GameManager.CurrentDay == 7)
         {
+            FindObjectOfType<AudioManager>().Play("Shaving");
             moveSpeed = 5f;
             _smokeAnimation.Play("Smoke", -1, 0);
             playerState = 3;
@@ -162,6 +172,7 @@ public class PlayerController : MonoBehaviour
 
         if (_isNearDoor && Input.GetKeyDown(KeyCode.E))
         {
+            FindObjectOfType<AudioManager>().Play("Door");
             text.text = null;
             if (!_openedDoor.GetComponent<DoorController>().IsOpened)
             {

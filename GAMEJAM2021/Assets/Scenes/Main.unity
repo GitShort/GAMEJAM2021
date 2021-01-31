@@ -7175,6 +7175,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1716689872}
   - component: {fileID: 1716689871}
+  - component: {fileID: 1716689873}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -7210,6 +7211,55 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1716689873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1716689870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a7cc51b8e8d22648b05ea0aacafeb60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Music
+    clip: {fileID: 8300000, guid: 92c29190ebf993243b50d68238005e4f, type: 3}
+    volume: 0.2
+    pitch: 0.5
+    loop: 1
+    source: {fileID: 0}
+  - name: Shaving
+    clip: {fileID: 8300000, guid: 60c9e305fd6e08b41a5247de49817105, type: 3}
+    volume: 0.6
+    pitch: 0.935
+    loop: 0
+    source: {fileID: 0}
+  - name: Door
+    clip: {fileID: 8300000, guid: 1b55e346a459a994c810a3992b84609c, type: 3}
+    volume: 0.6
+    pitch: 0.935
+    loop: 0
+    source: {fileID: 0}
+  - name: Computer
+    clip: {fileID: 8300000, guid: 2ba74455fb332a04896b3c330fd57c33, type: 3}
+    volume: 0.6
+    pitch: 0.935
+    loop: 0
+    source: {fileID: 0}
+  - name: Achievement
+    clip: {fileID: 8300000, guid: 2f90cb7f427332647a2cb455526cf7d5, type: 3}
+    volume: 0.4
+    pitch: 0.935
+    loop: 0
+    source: {fileID: 0}
+  - name: Drop
+    clip: {fileID: 8300000, guid: a5dac3ec789f52146a4ba08fff9ffeab, type: 3}
+    volume: 0.8
+    pitch: 0.935
+    loop: 0
+    source: {fileID: 0}
 --- !u!1 &1721848284
 GameObject:
   m_ObjectHideFlags: 0
