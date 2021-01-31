@@ -8,12 +8,27 @@ public class DoorController : MonoBehaviour
     public bool IsOpened = false;
     [SerializeField] GameObject _light;
 
+    [SerializeField] bool _isOutsideDoor = false;
 
     public void OpenDoor()
     {
-        IsOpened = true;
-        Doors[0].SetActive(false);
-        Doors[1].SetActive(true);
+        if (!_isOutsideDoor)
+        {
+            IsOpened = true;
+            Doors[0].SetActive(false);
+            Doors[1].SetActive(true);
+        }
+        else if (GameManager.TimeToLeave && _isOutsideDoor)
+        {
+            IsOpened = true;
+            Doors[0].SetActive(false);
+            Doors[1].SetActive(true);
+        }
+        else if (_isOutsideDoor)
+        {
+            Debug.Log("Its quarantine outside! You cant leave yet.");
+        }
+        
     }
 
     public void CloseDoor()

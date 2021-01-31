@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 
     Vector2 _movement;
 
+    bool _isNearHairClipper = false;
     bool _pickupAllowed = false;
     bool _isNearDoor = false;
     bool _isNearFridge = false;
@@ -23,6 +24,10 @@ public class PlayerController : MonoBehaviour
 
     bool _isNearSofa = false;
     bool _isNearTrashCan = false;
+    bool _isNearTrash = false;
+    bool _isNearNewClothes = false;
+
+    bool _isNearGym = false;
 
     GameObject _pickedUpObject = null;
     GameObject _openedDoor = null;
@@ -83,9 +88,9 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Computer window opened!");
         }
 
-        if ((_pickupAllowed && Input.GetKeyDown(KeyCode.E) && _pickedUpObject.name == "Hair clipper") && GameManager.CurrentDay == 0)
+        if ((_isNearHairClipper && Input.GetKeyDown(KeyCode.E)) && GameManager.CurrentDay == 0)
         {
-            _smokeAnimation.Play("Smoke");
+            _smokeAnimation.Play("Smoke", -1, 0);
             playerState = 2;
             Debug.Log("SHAVED");
             Destroy(_pickedUpObject);
@@ -102,31 +107,56 @@ public class PlayerController : MonoBehaviour
         {
             _isClothesPickedUp = false;
             dirtyClothes.SetActive(false);
+            _pickedUpObject.GetComponent<ObjectSwitchManager>().ActionDone();
             GameManager.LaundryDone = true;
             Debug.Log("Laundry done");
         }
         else if (_isNearSofa && Input.GetKeyDown(KeyCode.E) && GameManager.CurrentDay == 3 && !GameManager.SofaCleaned)
         {
             GameManager.SofaCleaned = true;
-            _pickedUpObject.GetComponent<SofaManager>().CleanSofa();
+            _pickedUpObject.GetComponent<ObjectSwitchManager>().ActionDone();
             if (!trashBag.activeInHierarchy)
                 trashBag.SetActive(true);
             trashCount++;
             Debug.Log("Sofa cleaned");
         }
-        else if (_isNearTrashCan && Input.GetKeyDown(KeyCode.E) && GameManager.CurrentDay == 3 && trashCount >= 1)
+        else if (_isNearTrash && Input.GetKeyDown(KeyCode.E) && GameManager.CurrentDay == 3)
+        {
+            trashCount++;
+            if (!trashBag.activeInHierarchy)
+                trashBag.SetActive(true);
+            Pickup();
+            Debug.Log("Trash picked up");
+        }
+        else if (_isNearTrashCan && Input.GetKeyDown(KeyCode.E) && GameManager.CurrentDay == 3 && trashCount >= 3)
         {
             GameManager.TrashThrownOut = true;
             trashBag.SetActive(false);
             Debug.Log("Trash thrown out!");
         }
-
-
-        else if (_pickupAllowed && Input.GetKeyDown(KeyCode.E))
+        else if (_isNearGym && Input.GetKeyDown(KeyCode.E) && (GameManager.CurrentDay == 4 || GameManager.CurrentDay == 5 || GameManager.CurrentDay == 6) && !GameManager.WorkedOut)
         {
-            Debug.Log("Picked up " + _pickedUpObject.name);
-            Pickup();
+            Debug.Log("Working out");
+            _smokeAnimation.Play("Smoke", -1, 0);
+            // Stop player movement while animation is playing
+            GameManager.WorkedOut = true;
         }
+        else if (_isNearNewClothes && Input.GetKeyDown(KeyCode.E) && GameManager.CurrentDay == 7)
+        {
+            moveSpeed = 5f;
+            _smokeAnimation.Play("Smoke", -1, 0);
+            playerState = 3;
+            Debug.Log("FINAL");
+            Destroy(_pickedUpObject);
+        }
+
+
+
+        //else if (_pickupAllowed && Input.GetKeyDown(KeyCode.E))
+        //{
+        //    Debug.Log("Picked up " + _pickedUpObject.name);
+        //    Pickup();
+        //}
 
 
 
@@ -154,7 +184,13 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag.Equals("Pickupable"))
+        if (collision.gameObject.tag.Equals("HairClipper"))
+        {
+            _isNearHairClipper = true;
+            _pickedUpObject = collision.gameObject;
+            text.text = "Press E to pick up " + _pickedUpObject.name;
+        }
+        else if (collision.gameObject.tag.Equals("Pickupable"))
         {
             _pickupAllowed = true;
             _pickedUpObject = collision.gameObject;
@@ -192,17 +228,36 @@ public class PlayerController : MonoBehaviour
             _isNearSofa = true;
             _pickedUpObject = collision.gameObject;
         }
+        else if (collision.gameObject.tag.Equals("Trash"))
+        {
+            _isNearTrash = true;
+            _pickedUpObject = collision.gameObject;
+        }
         else if (collision.gameObject.tag.Equals("TrashCan"))
         {
             _isNearTrashCan = true;
         }
-
+        else if (collision.gameObject.tag.Equals("GymSet"))
+        {
+            _isNearGym = true;
+        }
+        else if (collision.gameObject.tag.Equals("NewClothes"))
+        {
+            _isNearNewClothes = true;
+            _pickedUpObject = collision.gameObject;
+        }
 
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag.Equals("Pickupable"))
+        if (collision.gameObject.tag.Equals("HairClipper"))
+        {
+            _isNearHairClipper = false;
+            _pickedUpObject = null;
+            text.text = null;
+        }
+        else if (collision.gameObject.tag.Equals("Pickupable"))
         {
             _pickupAllowed = false;
             _pickedUpObject = null;
@@ -237,10 +292,22 @@ public class PlayerController : MonoBehaviour
             _isNearSofa = false;
             _pickedUpObject = null;
         }
+        else if (collision.gameObject.tag.Equals("Trash"))
+        {
+            _isNearTrash = false;
+        }
         else if (collision.gameObject.tag.Equals("TrashCan"))
         {
             _isNearTrashCan = false;
-
+        }
+        else if (collision.gameObject.tag.Equals("GymSet"))
+        {
+            _isNearGym = false;
+        }
+        else if (collision.gameObject.tag.Equals("NewClothes"))
+        {
+            _isNearNewClothes = false;
+            _pickedUpObject = null;
         }
     }
 

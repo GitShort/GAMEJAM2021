@@ -11,6 +11,12 @@ public class GameManager : MonoBehaviour
     public static bool LaundryDone;
     public static bool SofaCleaned;
     public static bool TrashThrownOut;
+    public static bool WorkedOut;
+
+    public static bool TimeToLeave;
+
+    [SerializeField] GameObject _gymEquipment;
+    [SerializeField] GameObject _newClothes;
 
     void Start()
     {
@@ -19,10 +25,16 @@ public class GameManager : MonoBehaviour
         SofaCleaned = false;
         TrashThrownOut = false;
         CurrentDay = 0;
+        WorkedOut = false;
+        TimeToLeave = false;
+        _gymEquipment.SetActive(false);
+        _newClothes.SetActive(false);
     }
 
     void Update()
     {
+        SpawnNewObjects(4, _gymEquipment);
+        SpawnNewObjects(7, _newClothes);
     }
 
     public static GameManager Instance()
@@ -40,9 +52,16 @@ public class GameManager : MonoBehaviour
         CurrentDay++;
     }
 
-    public static void ResetDay() // call this method to reset stuff for the new day
+    public static void ResetDay() // call this method to reset stuff for the next day
     {
         AteFood = false;
         ComputerActionDone = false;
+        WorkedOut = false;
+    }
+
+    public void SpawnNewObjects(int day, GameObject obj)
+    {
+        if (CurrentDay == day && obj != null)
+            obj.SetActive(true);
     }
 }

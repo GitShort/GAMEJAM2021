@@ -13,6 +13,9 @@ TagManager:
   - WashingMachine
   - Sofa
   - TrashCan
+  - Trash
+  - NewClothes
+  - GymSet
   layers:
   - Default
   - TransparentFX
