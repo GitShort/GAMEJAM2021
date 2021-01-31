@@ -16,6 +16,8 @@ TagManager:
   - Trash
   - NewClothes
   - GymSet
+  - Bed
+  - Exit
   layers:
   - Default
   - TransparentFX

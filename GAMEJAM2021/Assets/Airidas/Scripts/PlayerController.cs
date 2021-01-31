@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     bool _isNearTrashCan = false;
     bool _isNearTrash = false;
     bool _isNearNewClothes = false;
+    bool _isNearBed = false;
 
     bool _isNearGym = false;
 
@@ -34,13 +35,19 @@ public class PlayerController : MonoBehaviour
     GameObject _openedDoor = null;
 
     int trashCount = 0;
+    int workoutCount = 0;
 
+    [SerializeField] GameObject clothesShop;
+    [SerializeField] GameObject sportShop;
+    [SerializeField] GameObject fridge;
     [SerializeField] TextMeshPro text;
     [SerializeField] GameObject dirtyClothes;
     [SerializeField] GameObject trashBag;
 
     Animator _anim;
     [SerializeField] Animator _smokeAnimation;
+    [SerializeField] Animator _fadeout;
+    [SerializeField] Animator _fadeoutEnding;
 
     void Start()
     {
@@ -50,6 +57,7 @@ public class PlayerController : MonoBehaviour
         _anim = GetComponent<Animator>();
         dirtyClothes.SetActive(false);
         trashBag.SetActive(false);
+        fridge.SetActive(false);
     }
 
 
@@ -82,13 +90,21 @@ public class PlayerController : MonoBehaviour
         if (_isNearFridge && Input.GetKeyDown(KeyCode.E))
         {
             FindObjectOfType<AudioManager>().Play("Computer");
+            if (!GameManager.AteFood)
+            {
+                fridge.SetActive(true);
+            }
             Debug.Log("Fridge window opened!");
             DialogManager.Instance.ShowDialog(dialog, 0);
         }
 
-        if ((_isNearComputer && Input.GetKeyDown(KeyCode.E)) && (GameManager.CurrentDay == 1 || GameManager.CurrentDay == 6))
+        if ((_isNearComputer && Input.GetKeyDown(KeyCode.E)) && (GameManager.CurrentDay == 1 || GameManager.CurrentDay == 6) && !GameManager.ComputerActionDone)
         {
             FindObjectOfType<AudioManager>().Play("Computer");
+            if(GameManager.CurrentDay == 1)
+                sportShop.SetActive(true);
+            else if(GameManager.CurrentDay == 6)
+                clothesShop.SetActive(true);
             Debug.Log("Computer window opened!");
         }
 
@@ -98,6 +114,7 @@ public class PlayerController : MonoBehaviour
             _smokeAnimation.Play("Smoke", -1, 0);
             playerState = 2;
             Debug.Log("SHAVED");
+            GameManager.PlayerShaved = true;
             Destroy(_pickedUpObject);
             DialogManager.Instance.ShowDialog(dialog, 1);
 
@@ -145,7 +162,7 @@ public class PlayerController : MonoBehaviour
             trashBag.SetActive(false);
             Debug.Log("Trash thrown out!");
         }
-        else if (_isNearGym && Input.GetKeyDown(KeyCode.E) && (GameManager.CurrentDay == 4 || GameManager.CurrentDay == 5 || GameManager.CurrentDay == 6) && !GameManager.WorkedOut)
+        else if (_isNearGym && Input.GetKeyDown(KeyCode.E) && (GameManager.CurrentDay == 4 || GameManager.CurrentDay == 6) && !GameManager.WorkedOut)
         {
             FindObjectOfType<AudioManager>().Play("Shaving");
             Debug.Log("Working out");
@@ -153,6 +170,25 @@ public class PlayerController : MonoBehaviour
             // Stop player movement while animation is playing
             GameManager.WorkedOut = true;
         }
+
+        else if (_isNearGym && Input.GetKeyDown(KeyCode.E) && GameManager.CurrentDay == 5 && !GameManager.WorkedOut && workoutCount < 1)
+        {
+            FindObjectOfType<AudioManager>().Play("Shaving");
+            Debug.Log("Working out");
+            _smokeAnimation.Play("Smoke", -1, 0);
+            // Stop player movement while animation is playing
+            workoutCount++;
+        }
+        else if (_isNearGym && Input.GetKeyDown(KeyCode.E) && GameManager.CurrentDay == 5 && !GameManager.WorkedOut && workoutCount < 2 && !GameManager.AteFood)
+        {
+            FindObjectOfType<AudioManager>().Play("Shaving");
+            Debug.Log("Working out for the second time");
+            _smokeAnimation.Play("Smoke", -1, 0);
+            // Stop player movement while animation is playing
+            workoutCount++;
+            GameManager.WorkedOut = true;
+        }
+
         else if (_isNearNewClothes && Input.GetKeyDown(KeyCode.E) && GameManager.CurrentDay == 7)
         {
             FindObjectOfType<AudioManager>().Play("Shaving");
@@ -160,7 +196,15 @@ public class PlayerController : MonoBehaviour
             _smokeAnimation.Play("Smoke", -1, 0);
             playerState = 3;
             Debug.Log("FINAL");
+            GameManager.WearingNewClothes = true;
             Destroy(_pickedUpObject);
+        }
+
+        if (_isNearBed && Input.GetKeyDown(KeyCode.E) && GameManager.DayCompleted)
+        {
+            _fadeout.Play("Start_anim", -1, 0);
+            GameManager.UpdateDay();
+            GameManager.ResetDay();
         }
 
 
@@ -173,7 +217,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-        if (_isNearDoor && Input.GetKeyDown(KeyCode.E))
+            if (_isNearDoor && Input.GetKeyDown(KeyCode.E))
         {
             FindObjectOfType<AudioManager>().Play("Door");
             text.text = null;
@@ -227,43 +271,70 @@ public class PlayerController : MonoBehaviour
         else if (collision.gameObject.tag.Equals("Fridge"))
         {
             _isNearFridge = true;
+            if (!GameManager.AteFood)
+                text.text = "Press E to open the fridge";
         }
         else if (collision.gameObject.tag.Equals("PC"))
         {
             _isNearComputer = true;
+            if (!GameManager.ComputerActionDone && (GameManager.CurrentDay == 1 || GameManager.CurrentDay == 6))
+                text.text = "Press E to open up the computer screen";
         }
         else if (collision.gameObject.tag.Equals("DirtyClothes"))
         {
             _isNearDirtyClothes = true;
             _pickedUpObject = collision.gameObject;
+            if (GameManager.CurrentDay == 2)
+                text.text = "Press E to pick up " + _pickedUpObject.name;
         }
         else if (collision.gameObject.tag.Equals("WashingMachine"))
         {
             _isNearWashingMachine = true;
             _pickedUpObject = collision.gameObject;
+            if (_isClothesPickedUp)
+                text.text = "Press E to place clothes into washing machine";
         }
         else if (collision.gameObject.tag.Equals("Sofa"))
         {
             _isNearSofa = true;
             _pickedUpObject = collision.gameObject;
+            if (GameManager.CurrentDay == 3 && !GameManager.SofaCleaned)
+                text.text = "Press E to clean the couch";
         }
         else if (collision.gameObject.tag.Equals("Trash"))
         {
             _isNearTrash = true;
             _pickedUpObject = collision.gameObject;
+            if (GameManager.CurrentDay == 3)
+                text.text = "Press E to pick up " + _pickedUpObject.name;
         }
         else if (collision.gameObject.tag.Equals("TrashCan"))
         {
             _isNearTrashCan = true;
+            if (trashCount >= 3)
+                text.text = "Press E to throw out the trash ";
         }
         else if (collision.gameObject.tag.Equals("GymSet"))
         {
             _isNearGym = true;
+            if (!GameManager.WorkedOut)
+                text.text = "Press E to exercise";
         }
         else if (collision.gameObject.tag.Equals("NewClothes"))
         {
             _isNearNewClothes = true;
             _pickedUpObject = collision.gameObject;
+            if (GameManager.CurrentDay == 7)
+                text.text = "Press E to wear new clothes";
+        }
+        else if (collision.gameObject.tag.Equals("Bed"))
+        {
+            _isNearBed = true;
+        }
+        else if (collision.gameObject.tag.Equals("Exit") && GameManager.TimeToLeave)
+        {
+            _fadeoutEnding.Play("Fadeoutending", -1, 0);
+            moveSpeed = 0;
         }
 
     }
@@ -291,42 +362,55 @@ public class PlayerController : MonoBehaviour
         else if (collision.gameObject.tag.Equals("Fridge"))
         {
             _isNearFridge = false;
+            text.text = null;
         }
         else if (collision.gameObject.tag.Equals("PC"))
         {
             _isNearComputer = false;
+            text.text = null;
         }
         else if (collision.gameObject.tag.Equals("DirtyClothes"))
         {
             _isNearDirtyClothes = false;
             _pickedUpObject = null;
+            text.text = null;
         }
         else if (collision.gameObject.tag.Equals("WashingMachine"))
         {
             _isNearWashingMachine = false;
             _pickedUpObject = null;
+            text.text = null;
         }
         else if (collision.gameObject.tag.Equals("Sofa"))
         {
             _isNearSofa = false;
             _pickedUpObject = null;
+            text.text = null;
         }
         else if (collision.gameObject.tag.Equals("Trash"))
         {
             _isNearTrash = false;
+            text.text = null;
         }
         else if (collision.gameObject.tag.Equals("TrashCan"))
         {
             _isNearTrashCan = false;
+            text.text = null;
         }
         else if (collision.gameObject.tag.Equals("GymSet"))
         {
             _isNearGym = false;
+            text.text = null;
         }
         else if (collision.gameObject.tag.Equals("NewClothes"))
         {
             _isNearNewClothes = false;
             _pickedUpObject = null;
+            text.text = null;
+        }
+        else if (collision.gameObject.tag.Equals("Bed"))
+        {
+            _isNearBed = false;
         }
     }
 

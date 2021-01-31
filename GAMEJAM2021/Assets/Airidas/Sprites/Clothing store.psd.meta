@@ -1,19 +1,7 @@
 fileFormatVersion: 2
-guid: 06a81cbc40767d946a2870529b2ed791
+guid: e8eb7b4c88f5431479250a6702c6856e
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: 6689994617219458793
-    second: FridgeFood_0
-  - first:
-      213: -2747963174308580874
-    second: FridgeFood_1
-  - first:
-      213: -7943611007534131879
-    second: FridgeFood_2
-  - first:
-      213: 4336542555484315072
-    second: FridgeFood_3
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -53,7 +41,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -111,91 +99,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: FridgeFood_0
-      rect:
-        serializedVersion: 2
-        x: 20
-        y: 86
-        width: 29
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9e624a4c8a2a7dc50800000000000000
-      internalID: 6689994617219458793
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FridgeFood_1
-      rect:
-        serializedVersion: 2
-        x: 78
-        y: 86
-        width: 18
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6f17b736d064dd9d0800000000000000
-      internalID: -2747963174308580874
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FridgeFood_2
-      rect:
-        serializedVersion: 2
-        x: 20
-        y: 42
-        width: 32
-        height: 29
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9559b0e20ef92c190800000000000000
-      internalID: -7943611007534131879
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: FridgeFood_3
-      rect:
-        serializedVersion: 2
-        x: 75
-        y: 42
-        width: 30
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0cdd10d6a7e7e2c30800000000000000
-      internalID: 4336542555484315072
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
