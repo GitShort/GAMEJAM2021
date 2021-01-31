@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Fridge window opened!");
         }
 
-        if ((_isNearComputer && Input.GetKeyDown(KeyCode.E)) && (GameManager.CurrentDay == 1 || GameManager.CurrentDay == 6))
+        if ((_isNearComputer && Input.GetKeyDown(KeyCode.E)) && (GameManager.CurrentDay == 1 || GameManager.CurrentDay == 6) && !GameManager.ComputerActionDone)
         {
             FindObjectOfType<AudioManager>().Play("Computer");
             clothesShop.SetActive(true);
